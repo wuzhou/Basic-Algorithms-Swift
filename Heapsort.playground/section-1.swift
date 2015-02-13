@@ -1,6 +1,3 @@
-// Playground - noun: a place where people can play
-
-import UIKit
 
 var sort:[Int] = [1,0,10,20,3,5,6,4,9,8,12,17,34,11]
 
