@@ -50,7 +50,11 @@ func randPartition(inout data:[Int], leftIndex:Int, rightIndex:Int)->Int{
 
     var index:Int = leftIndex;
     
-    let randomIndex:Int = leftIndex + Int(arc4random_uniform(rightIndex - leftIndex + 1))
+    let range:Int = rightIndex - leftIndex + 1;
+    
+    let randomNum:Int = Int(arc4random_uniform(UInt32(range)))
+    
+    let randomIndex:Int = leftIndex + randomNum
     
     let pivot:Int = data[randomIndex]
     
