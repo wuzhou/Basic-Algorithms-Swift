@@ -90,8 +90,9 @@ let probsTable = [ProbTuple(probIndex: 1, prob: 0.2), ProbTuple(probIndex: 2, pr
 
 let aliasTable = GenerateAliasTable(probsTable)
 
+var intArray = [Int](count: aliasTable.count, repeatedValue: 0)
 
-for var i:Int=0; i<10; i++
+for var i:Int=0; i<1000; i++
 {
     let index = Int(arc4random_uniform(UInt32(aliasTable.count)))
     
@@ -101,11 +102,15 @@ for var i:Int=0; i<10; i++
         
         if probValue < alias.prob
         {
-            println(alias.probIndex)
+            intArray[alias.probIndex - 1] += 1
         }
         else
         {
-            println(alias.alias)
+            intArray[alias.alias - 1] += 1
         }
-    
+}
+
+for var i:Int=0; i<intArray.count; i++
+{
+    println(intArray[i])
 }
