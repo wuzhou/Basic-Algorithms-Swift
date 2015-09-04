@@ -73,8 +73,6 @@ func heapsort(inout data:[Int]){
     
     for i = data.count - 1; i>0; i-- {
         
-        print(1)
-        
         var temp = data[0]
         data[0] = data[i]
         data[i] = temp
