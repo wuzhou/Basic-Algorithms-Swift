@@ -44,6 +44,7 @@ class EventRecorder
     {
         println("EventRecorder 记录按钮事件")
     }
+    
 }
 
 class AdvanceEventRecorder: EventRecorder
@@ -61,4 +62,5 @@ class AdvanceEventRecorder: EventRecorder
 
 let recorder:EventRecorder = AdvanceEventRecorder()
 let event:Event = KeyEvent()
+recorder.recordEvent(event)
 event.recordEvent(recorder)
