@@ -1,6 +1,8 @@
 //: Alias Method
 
 import UIKit
+import XCPlayground
+import Foundation
 
 struct ProbTuple
 {
@@ -86,31 +88,47 @@ func GenerateAliasTable(probs:[ProbTuple]) -> [AliasTuple]
     return aliasTable
 }
 
-let probsTable = [ProbTuple(probIndex: 1, prob: 0.2), ProbTuple(probIndex: 2, prob: 0.3), ProbTuple(probIndex: 3, prob: 0.5)]
+let probsTable = [ProbTuple(probIndex: 1, prob: 0.2), ProbTuple(probIndex: 2, prob: 0.3), ProbTuple(probIndex: 3, prob: 0.4999), ProbTuple(probIndex: 4, prob: 0.0001)]
 
 let aliasTable = GenerateAliasTable(probsTable)
 
 var intArray = [Int](count: aliasTable.count, repeatedValue: 0)
 
-for var i:Int=0; i<1000; i++
+var indexNum = 0
+
+for var i:Int=0; i<10000; i++
 {
     let index = Int(arc4random_uniform(UInt32(aliasTable.count)))
     
     let alias = aliasTable[index]
     
-        let probValue = Double(arc4random()) / Double(UInt32.max)
-        
-        if probValue < alias.prob
-        {
-            intArray[alias.probIndex - 1] += 1
-        }
-        else
-        {
-            intArray[alias.alias - 1] += 1
-        }
+    let probValue = Double(arc4random()) / Double(UInt32.max)
+    
+    if probValue < alias.prob
+    {
+        intArray[alias.probIndex - 1] += 1
+        indexNum = alias.probIndex
+    }
+    else
+    {
+        intArray[alias.alias - 1] += 1
+        indexNum = alias.alias
+    }
+    
+    
+    XCPCaptureValue("Index", value: indexNum)
 }
 
 for var i:Int=0; i<intArray.count; i++
 {
-    println(intArray[i])
+    print(intArray[i])
 }
+
+func plotArrayInPlayground<T>(arrayToPlot:Array<T>, title:String) {
+    for currentValue in arrayToPlot {
+        XCPCaptureValue(title, value: currentValue)
+    }
+}
+
+plotArrayInPlayground(intArray, title: "One Diagram")
+
